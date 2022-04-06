@@ -7,27 +7,25 @@ object Ceasar {
 
   def encrypt(msg: String, shifts: Int): String = {
     val upText = msg.toUpperCase();
-    upText.map(c => {
-      if ('A'.toInt to 'Z'.toInt contains c.toInt) {
-        ((c.toInt - 65) + shifts) % 26 match {
-          case x if (x < 0) => (x + 91).toChar
-          case x if (x >= 0) => (x + 65).toChar
-        }
-      } else c
-    })
+    upText.map{
+      case c if 'A'.toInt to 'Z'.toInt contains c.toInt => ((c.toInt - 65) + shifts) % 26 match {
+        case x if (x < 0) => (x + 91).toChar
+        case x if (x >= 0) => (x + 65).toChar
+      }
+      case c if (!('A'.toInt to 'Z'.toInt contains c.toInt)) => c
+    }
   }
 
   def decrypt(encryptedMsg: String, shifts: Int): String = {
     val upText = encryptedMsg.toUpperCase();
-    upText.map(c => {
-      if ('A'.toInt to 'Z'.toInt contains c.toInt) {
-        ((c.toInt - 65) - shifts) % 26 match {
+    upText.map {
+      case c if 'A'.toInt to 'Z'.toInt contains c.toInt => ((c.toInt - 65) - shifts) % 26 match {
           case x if (x < 0) => (x + 91).toChar
           case x if (x >= 0) => (x + 65).toChar
         }
-      } else c
-    })
-  }
+      case c if (!('A'.toInt to 'Z'.toInt contains c.toInt)) => c
+      }
+    }
 
   def cipher(method: Char): Unit = method match {
     case 'e' =>
