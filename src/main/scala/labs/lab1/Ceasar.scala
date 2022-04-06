@@ -7,12 +7,10 @@ object Ceasar {
 
   def encrypt(msg: String, shifts: Int): String = {
     val upText = msg.toUpperCase();
-    upText.map{
-      case c if 'A'.toInt to 'Z'.toInt contains c.toInt => ((c.toInt - 65) + shifts) % 26 match {
-        case x if (x < 0) => (x + 91).toChar
-        case x if (x >= 0) => (x + 65).toChar
-      }
-      case c if (!('A'.toInt to 'Z'.toInt contains c.toInt)) => c
+    upText.map {
+      case c if !('A' to 'Z' contains c) => c
+      case c if ((c.toInt - 65) + shifts) % 26 < 0 => (c.toInt + 91).toChar
+      case c if ((c.toInt - 65) + shifts) % 26 >= 0 => (c.toInt + 65).toChar
     }
   }
 

@@ -19,8 +19,23 @@ class CeasarTest extends FlatSpec with Matchers{
       "JGNNQ, KV`U QPG QH VJG QNFGUV OGVJQFU QH GPETARVKQP."
   }
 
+  it should "encrypt number/symbol" in {
+    encrypt("12345", 5) shouldBe
+      "12345"
+  }
+
   it should "decrypt an encrypted text" in {
     decrypt("JGNNQ, KV`U QPG QH VJG QNFGUV OGVJQFU QH GPETARVKQP.", 2)shouldBe
       "HELLO, IT`S ONE OF THE OLDEST METHODS OF ENCRYPTION."
+  }
+
+  it should "decrypt an encrypted number/symbol" in {
+    decrypt("12345", 2) shouldBe
+      "12345"
+  }
+
+  it should "decrypt an encrypted number/symbol" in {
+    decrypt("HELLO", 3) shouldBe
+      "EBIIL"
   }
 }
